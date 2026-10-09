@@ -97,18 +97,24 @@ export function TodoItem({ todo }: TodoItemProps) {
           >
             {todo.title}
           </label>
-          <Button variant="ghost" size="sm" onClick={startEditing}>
-            Edit<span className="sr-only"> {todo.title}</span>
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label={`Edit ${todo.title}`}
+            onClick={startEditing}
+          >
+            Edit
           </Button>
           <Button
             variant="ghost"
             size="sm"
             className="text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
+            aria-label={`Delete ${todo.title}`}
             onClick={() => {
               removeTodo(todo.id);
             }}
           >
-            Delete<span className="sr-only"> {todo.title}</span>
+            Delete
           </Button>
         </>
       )}
