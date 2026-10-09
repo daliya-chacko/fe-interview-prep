@@ -5,6 +5,7 @@
 type ImportMetaEnv = {
   readonly VITE_API_BASE_URL?: string;
   readonly VITE_ENABLE_MOCKS?: string;
+  readonly VITE_SEARCH_API_URL?: string;
 };
 
 type ImportMeta = {

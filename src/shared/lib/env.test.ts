@@ -4,7 +4,11 @@ import { parseEnv } from './env';
 
 describe('parseEnv', () => {
   it('applies defaults when variables are missing', () => {
-    expect(parseEnv({})).toEqual({ VITE_API_BASE_URL: '/api', VITE_ENABLE_MOCKS: false });
+    expect(parseEnv({})).toEqual({
+      VITE_API_BASE_URL: '/api',
+      VITE_ENABLE_MOCKS: false,
+      VITE_SEARCH_API_URL: 'https://dummyjson.com/products/search',
+    });
   });
 
   it('coerces boolean-like strings', () => {
@@ -14,5 +18,6 @@ describe('parseEnv', () => {
 
   it('throws a readable error for invalid values', () => {
     expect(() => parseEnv({ VITE_API_BASE_URL: '' })).toThrow(/VITE_API_BASE_URL/);
+    expect(() => parseEnv({ VITE_SEARCH_API_URL: 'not-a-url' })).toThrow(/VITE_SEARCH_API_URL/);
   });
 });
