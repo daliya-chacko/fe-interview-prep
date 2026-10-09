@@ -9,6 +9,8 @@ const envSchema = z.object({
   VITE_ENABLE_MOCKS: z.stringbool().default(false),
   /** Third-party product search endpoint; absolute so it bypasses `VITE_API_BASE_URL`. */
   VITE_SEARCH_API_URL: z.url().default('https://dummyjson.com/products/search'),
+  /** Third-party users list endpoint; absolute so it bypasses `VITE_API_BASE_URL`. */
+  VITE_USERS_API_URL: z.url().default('https://dummyjson.com/users'),
 });
 
 export type Env = z.infer<typeof envSchema>;

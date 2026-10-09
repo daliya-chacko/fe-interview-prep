@@ -8,6 +8,8 @@ export const paths = {
   home: '/',
   todos: '/todos',
   search: '/search',
+  register: '/register',
+  users: '/users',
   login: '/login',
   orders: '/orders',
   admin: '/admin',
