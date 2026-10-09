@@ -231,9 +231,9 @@ describe('RegistrationPage', () => {
     const { user, unmount } = await renderRegistrationPage();
     await fillPersonal(user);
     await clickNext(user);
+    // Typed on the current step and never saved with Next or Back: it must still come back.
     await user.type(field('City'), 'Kochi');
-    await user.click(screen.getByRole('button', { name: 'Back' }));
-    await clickNext(user);
+    await user.type(field('Postal code'), '6820');
     expect(currentStep()).toMatch(/Address/);
     unmount();
 
@@ -253,6 +253,7 @@ describe('RegistrationPage', () => {
 
     expect(currentStep()).toMatch(/Address/);
     expect(field('City')).toHaveValue('Kochi');
+    expect(field('Postal code')).toHaveValue('6820');
 
     await refreshedUser.click(screen.getByRole('button', { name: 'Back' }));
     expect(field('Full name')).toHaveValue('Ada Lovelace');

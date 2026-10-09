@@ -4,6 +4,7 @@ import { useForm, useWatch } from 'react-hook-form';
 
 import { Button, Input } from '@/shared/components/ui';
 
+import { useDraftSync } from '../hooks/useDraftSync';
 import {
   PLAN_LABELS,
   PLANS,
@@ -23,24 +24,28 @@ export type PreferencesStepProps = {
   onNext: (values: Preferences) => void;
   /** Called with whatever is currently entered, valid or not, so nothing is lost going back. */
   onBack: (values: PreferencesValues) => void;
+  /** Called on every change so the draft survives a refresh mid-step. */
+  onChange?: (values: PreferencesValues) => void;
 };
 
 const PLAN_GROUP_ID = 'preferences-plan';
 const SKILLS_ID = 'preferences-skills';
 const NEW_SKILL_ID = 'preferences-new-skill';
 
-export function PreferencesStep({ defaultValues, onNext, onBack }: PreferencesStepProps) {
+export function PreferencesStep({ defaultValues, onNext, onBack, onChange }: PreferencesStepProps) {
   const {
     register,
     handleSubmit,
     getValues,
     setValue,
     control,
+    subscribe,
     formState: { errors },
   } = useForm<PreferencesValues, unknown, Preferences>({
     resolver: zodResolver(preferencesSchema),
     defaultValues: { plan: defaultValues.plan ?? undefined, skills: defaultValues.skills },
   });
+  useDraftSync(subscribe, onChange);
   const skills = useWatch({ control, name: 'skills' });
   const [newSkill, setNewSkill] = useState('');
 

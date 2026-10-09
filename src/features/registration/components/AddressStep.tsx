@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 
+import { useDraftSync } from '../hooks/useDraftSync';
 import {
   type Address,
   addressSchema,
@@ -19,16 +20,20 @@ export type AddressStepProps = {
   onNext: (values: Address) => void;
   /** Called with whatever is currently typed, valid or not, so nothing is lost going back. */
   onBack: (values: AddressValues) => void;
+  /** Called on every change so the draft survives a refresh mid-step. */
+  onChange?: (values: AddressValues) => void;
 };
 
-export function AddressStep({ defaultValues, onNext, onBack }: AddressStepProps) {
+export function AddressStep({ defaultValues, onNext, onBack, onChange }: AddressStepProps) {
   const {
     register,
     handleSubmit,
     getValues,
     control,
+    subscribe,
     formState: { errors },
   } = useForm({ resolver: zodResolver(addressSchema), defaultValues });
+  useDraftSync(subscribe, onChange);
   const country = useWatch({ control, name: 'country' });
 
   return (
