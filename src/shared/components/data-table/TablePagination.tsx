@@ -4,10 +4,11 @@ import { Button, inputClassName } from '@/shared/components/ui';
 
 import type { PageInfo } from './types';
 
-export type TablePaginationProps = PageInfo & {
-  pageSizeOptions: readonly number[];
+export type TablePaginationProps<Size extends number = number> = PageInfo & {
+  pageSizeOptions: readonly Size[];
   onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  /** Receives one of `pageSizeOptions`, so a literal union stays a literal union. */
+  onPageSizeChange: (pageSize: Size) => void;
   /** Plural noun for the summary, e.g. "users" in "Showing 1-10 of 600 users". */
   itemsLabel?: string;
 };
@@ -16,7 +17,7 @@ export type TablePaginationProps = PageInfo & {
  * Page-size choice, previous/next controls and a live summary of the visible range. The summary
  * is a status region so assistive technology hears the new range after every change.
  */
-export function TablePagination({
+export function TablePagination<Size extends number = number>({
   page,
   pageCount,
   pageSize,
@@ -27,7 +28,7 @@ export function TablePagination({
   onPageChange,
   onPageSizeChange,
   itemsLabel = 'rows',
-}: TablePaginationProps) {
+}: TablePaginationProps<Size>) {
   const pageSizeId = useId();
 
   return (
@@ -40,7 +41,8 @@ export function TablePagination({
           id={pageSizeId}
           value={pageSize}
           onChange={(event) => {
-            onPageSizeChange(Number(event.target.value));
+            const next = pageSizeOptions.find((option) => String(option) === event.target.value);
+            if (next !== undefined) onPageSizeChange(next);
           }}
           className={inputClassName('h-9 w-auto pr-8')}
         >
