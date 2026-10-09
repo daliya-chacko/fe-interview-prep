@@ -20,6 +20,10 @@ export const routes: RouteObject[] = [
         index: true,
         lazy: () => import('@/pages/HomePage').then((m) => ({ Component: m.HomePage })),
       },
+      {
+        path: 'search',
+        lazy: () => import('@/pages/SearchPage').then((m) => ({ Component: m.SearchPage })),
+      },
     ],
   },
 ];
