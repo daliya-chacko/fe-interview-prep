@@ -14,6 +14,12 @@ describe('buildUrl', () => {
     const url = new URL(buildUrl('questions', { q: 'hooks', category: undefined, page: '' }));
     expect(url.search).toBe('?q=hooks');
   });
+
+  it('uses an absolute http(s) path as-is instead of joining it onto the base', () => {
+    expect(buildUrl('https://example.com/products/search', { q: 'phone' })).toBe(
+      'https://example.com/products/search?q=phone',
+    );
+  });
 });
 
 describe('http', () => {
