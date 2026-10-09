@@ -9,4 +9,5 @@ export const paths = {
   todos: '/todos',
   search: '/search',
   register: '/register',
+  users: '/users',
 } as const;

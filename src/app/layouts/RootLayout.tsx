@@ -9,6 +9,7 @@ const navItems = [
   { to: paths.todos, label: 'Todos', end: false },
   { to: paths.search, label: 'Search', end: false },
   { to: paths.register, label: 'Register', end: false },
+  { to: paths.users, label: 'Users', end: false },
 ] as const;
 
 export function RootLayout() {
