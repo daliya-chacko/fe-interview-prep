@@ -29,6 +29,11 @@ export const routes: RouteObject[] = [
         path: paths.search,
         lazy: () => import('@/pages/SearchPage').then((m) => ({ Component: m.SearchPage })),
       },
+      {
+        path: paths.register,
+        lazy: () =>
+          import('@/pages/RegistrationPage').then((m) => ({ Component: m.RegistrationPage })),
+      },
     ],
   },
 ];

@@ -12,7 +12,7 @@ lives on its own route.
 | --- | ------------------------ | --------------------------------------------------------- |
 | 1   | Todo App                 | https://github.com/daliya-chacko/fe-interview-prep/pull/6 |
 | 2   | Live Search              | https://github.com/daliya-chacko/fe-interview-prep/pull/7 |
-| 3   | Registration Wizard      |                                                           |
+| 3   | Registration Wizard      | https://github.com/daliya-chacko/fe-interview-prep/pull/8 |
 | 4   | Data Table               |                                                           |
 | 5   | Login & Session Handling |                                                           |
 

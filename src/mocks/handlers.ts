@@ -1,5 +1,6 @@
 import { http, HttpResponse, type RequestHandler } from 'msw';
 
+import { registrationHandlers } from '@/features/registration/mocks';
 import { searchHandlers } from '@/features/search/mocks';
 import { env } from '@/shared/lib/env';
 
@@ -14,4 +15,5 @@ export const api = (path: string) => `${env.VITE_API_BASE_URL.replace(/\/+$/, ''
 export const handlers: RequestHandler[] = [
   http.get(api('/health'), () => HttpResponse.json({ status: 'ok' })),
   ...searchHandlers,
+  ...registrationHandlers,
 ];
