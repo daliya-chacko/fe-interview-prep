@@ -36,20 +36,35 @@ async function requestRefresh(refreshToken: string): Promise<Session> {
  */
 let refreshInFlight: Promise<string> | null = null;
 
+/** True while the store still holds the refresh token this round trip was started with. */
+function isCurrentRefreshToken(refreshToken: string): boolean {
+  return useSessionStore.getState().refreshToken === refreshToken;
+}
+
 async function performRefresh(): Promise<string> {
   const { refreshToken, setSession, clearSession } = useSessionStore.getState();
   if (refreshToken === null) {
     throw new SessionExpiredError();
   }
+  let session: Session;
   try {
-    const session = await requestRefresh(refreshToken);
-    setSession(session);
-    return session.accessToken;
+    session = await requestRefresh(refreshToken);
   } catch (error) {
     // A refresh that fails for any reason ends the session: there is no token left to try.
-    clearSession();
+    // Unless the session already changed underneath (a logout or a new login during the round
+    // trip), in which case that newer state wins and is left alone.
+    if (isCurrentRefreshToken(refreshToken)) {
+      clearSession();
+    }
     throw new SessionExpiredError(error);
   }
+  // A logout or a new login that happened while the request was in flight wins: applying the
+  // stale result would silently sign the user back in.
+  if (!isCurrentRefreshToken(refreshToken)) {
+    throw new SessionExpiredError();
+  }
+  setSession(session);
+  return session.accessToken;
 }
 
 /**

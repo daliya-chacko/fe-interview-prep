@@ -1,5 +1,5 @@
-import { http, HttpResponse } from 'msw';
-import { afterEach, describe, expect, it } from 'vitest';
+import { delay, http, HttpResponse } from 'msw';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { api } from '@/mocks/handlers';
 import { server } from '@/mocks/server';
@@ -134,6 +134,34 @@ describe('authHttp', () => {
     expect(isSessionExpiredError(error)).toBe(true);
     expect(isHttpError(error, 401)).toBe(true);
     expect(refreshCalls()).toBe(1);
+    expect(useSessionStore.getState()).toMatchObject({
+      accessToken: null,
+      refreshToken: null,
+      user: null,
+    });
+    expect(window.localStorage.getItem(SESSION_STORAGE_KEY)).not.toContain(session.refreshToken);
+  });
+
+  it('drops the refresh result when the user logs out while it is in flight', async () => {
+    const session = issueSession(regularAccount.user, { accessTtlMs: -1 });
+    signIn(session);
+    let refreshStarted = false;
+    server.use(
+      http.post(api('/auth/refresh'), async () => {
+        refreshStarted = true;
+        await delay(50);
+        return undefined;
+      }),
+    );
+
+    const pending = failureOf(authHttp('/me'));
+    await vi.waitFor(() => {
+      expect(refreshStarted).toBe(true);
+    });
+    useSessionStore.getState().clearSession();
+    const error = await pending;
+
+    expect(isSessionExpiredError(error)).toBe(true);
     expect(useSessionStore.getState()).toMatchObject({
       accessToken: null,
       refreshToken: null,
