@@ -1,5 +1,6 @@
 import { http, HttpResponse, type RequestHandler } from 'msw';
 
+import { authHandlers } from '@/features/auth/mocks';
 import { registrationHandlers } from '@/features/registration/mocks';
 import { searchHandlers } from '@/features/search/mocks';
 import { usersHandlers } from '@/features/users/mocks';
@@ -18,4 +19,5 @@ export const handlers: RequestHandler[] = [
   ...searchHandlers,
   ...registrationHandlers,
   ...usersHandlers,
+  ...authHandlers,
 ];

@@ -4,6 +4,7 @@ import { RootLayout } from '@/app/layouts/RootLayout';
 import { HydrateFallback } from '@/app/router/HydrateFallback';
 import { paths } from '@/app/router/paths';
 import { RouteErrorBoundary } from '@/app/router/RouteErrorBoundary';
+import { RequireAdmin, RequireAuth } from '@/features/auth';
 
 /**
  * Route tree. Pages are code-split with `lazy` so the initial bundle only contains the shell.
@@ -37,6 +38,30 @@ export const routes: RouteObject[] = [
       {
         path: paths.users,
         lazy: () => import('@/pages/UsersPage').then((m) => ({ Component: m.UsersPage })),
+      },
+      {
+        path: paths.login,
+        lazy: () => import('@/pages/LoginPage').then((m) => ({ Component: m.LoginPage })),
+      },
+      {
+        // Layout route: everything below needs a session; the guard redirects or waits for restore.
+        element: <RequireAuth loginPath={paths.login} />,
+        children: [
+          {
+            path: paths.orders,
+            lazy: () => import('@/pages/OrdersPage').then((m) => ({ Component: m.OrdersPage })),
+          },
+          {
+            Component: RequireAdmin,
+            children: [
+              {
+                path: paths.admin,
+                lazy: () =>
+                  import('@/pages/AdminStatsPage').then((m) => ({ Component: m.AdminStatsPage })),
+              },
+            ],
+          },
+        ],
       },
     ],
   },

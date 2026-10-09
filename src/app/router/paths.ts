@@ -10,4 +10,7 @@ export const paths = {
   search: '/search',
   register: '/register',
   users: '/users',
+  login: '/login',
+  orders: '/orders',
+  admin: '/admin',
 } as const;
