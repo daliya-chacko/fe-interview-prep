@@ -8,6 +8,7 @@ describe('parseEnv', () => {
       VITE_API_BASE_URL: '/api',
       VITE_ENABLE_MOCKS: false,
       VITE_SEARCH_API_URL: 'https://dummyjson.com/products/search',
+      VITE_USERS_API_URL: 'https://dummyjson.com/users',
     });
   });
 
