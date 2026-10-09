@@ -3,6 +3,21 @@
 Front-end interview preparation app. This repository currently contains the application
 foundation: tooling, architecture and an app shell with no product features yet.
 
+## Submission
+
+Each question is one branch, one pull request and one merge, in order from 1 to 5. Every question
+lives on its own route.
+
+| #   | Question                 | PR link |
+| --- | ------------------------ | ------- |
+| 1   | Todo App                 |         |
+| 2   | Live Search              |         |
+| 3   | Registration Wizard      |         |
+| 4   | Data Table               |         |
+| 5   | Login & Session Handling |         |
+
+Video:
+
 ## Stack
 
 | Concern      | Choice                                                     | Why                                                                                  |
