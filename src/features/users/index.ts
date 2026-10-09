@@ -1,5 +1,6 @@
 export { fetchUsers } from './api/users.api';
 export { usersKeys, usersListQuery } from './api/users.queries';
+export { UsersTable } from './components/UsersTable';
 export { useUsersView } from './hooks/useUsersView';
 export {
   type User,
