@@ -1,21 +1,21 @@
-## Summary
+## Problem
 
-<!-- What this changes and why, in a few sentences a non-technical reader can follow. -->
+<!-- What this PR solves (1–2 lines). -->
 
 Closes #
 
-## How this was verified
+## Approach
 
-<!-- What you ran or exercised and what it reported, plus anything you checked by hand. -->
+<!-- How the components and state are organised. -->
 
-## Contract or schema change
+## Decisions & trade-offs
 
-<!-- Delete this heading and its comment if no interface, schema or public contract changed.
-     Otherwise: what changed, what accompanies it, and what a consumer has to do. -->
+<!-- What you chose, and why over the alternatives. -->
 
-## Checklist
+## Screenshots
 
-- [ ] The change does what the issue asks, and nothing it does not ask for
-- [ ] Every gate command this repo registers passes on this branch
-- [ ] New or changed behaviour is covered by tests
-- [ ] Commits are clean: meaningful messages, no secrets, no `--no-verify`
+<!-- UI before/after or a GIF. Required. -->
+
+## How to test
+
+<!-- Page to open, steps, test files. -->
