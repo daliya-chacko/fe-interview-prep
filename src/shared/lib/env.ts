@@ -7,6 +7,8 @@ import { z } from 'zod';
 const envSchema = z.object({
   VITE_API_BASE_URL: z.string().min(1).default('/api'),
   VITE_ENABLE_MOCKS: z.stringbool().default(false),
+  /** Third-party product search endpoint; absolute so it bypasses `VITE_API_BASE_URL`. */
+  VITE_SEARCH_API_URL: z.url().default('https://dummyjson.com/products/search'),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -7,6 +7,7 @@ import { cn } from '@/shared/lib/cn';
 const navItems = [
   { to: paths.home, label: 'Home', end: true },
   { to: paths.todos, label: 'Todos', end: false },
+  { to: paths.search, label: 'Search', end: false },
 ] as const;
 
 export function RootLayout() {

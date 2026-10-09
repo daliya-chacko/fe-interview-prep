@@ -35,9 +35,16 @@ function resolveBaseUrl(): string {
   return new URL(base, window.location.origin).toString();
 }
 
+const ABSOLUTE_URL = /^https?:\/\//;
+
+/**
+ * Resolves `path` against the configured API base, or uses it as-is when it is already an
+ * absolute `http(s)` URL (for third-party APIs that live outside `VITE_API_BASE_URL`).
+ */
 export function buildUrl(path: string, searchParams?: Record<string, SearchParamValue>): string {
-  const base = resolveBaseUrl().replace(/\/+$/, '');
-  const url = new URL(`${base}/${path.replace(/^\/+/, '')}`);
+  const url = ABSOLUTE_URL.test(path)
+    ? new URL(path)
+    : new URL(`${resolveBaseUrl().replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`);
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (value !== undefined && value !== '') url.searchParams.set(key, String(value));

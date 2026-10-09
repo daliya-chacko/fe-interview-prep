@@ -7,4 +7,5 @@
 export const paths = {
   home: '/',
   todos: '/todos',
+  search: '/search',
 } as const;
