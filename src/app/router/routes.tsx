@@ -2,6 +2,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router';
 
 import { RootLayout } from '@/app/layouts/RootLayout';
 import { HydrateFallback } from '@/app/router/HydrateFallback';
+import { paths } from '@/app/router/paths';
 import { RouteErrorBoundary } from '@/app/router/RouteErrorBoundary';
 
 /**
@@ -19,6 +20,10 @@ export const routes: RouteObject[] = [
       {
         index: true,
         lazy: () => import('@/pages/HomePage').then((m) => ({ Component: m.HomePage })),
+      },
+      {
+        path: paths.todos,
+        lazy: () => import('@/pages/TodosPage').then((m) => ({ Component: m.TodosPage })),
       },
     ],
   },

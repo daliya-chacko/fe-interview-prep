@@ -4,7 +4,10 @@ import { paths } from '@/app/router/paths';
 import { cn } from '@/shared/lib/cn';
 
 /** Top-level navigation. Add an entry here when a feature registers a route. */
-const navItems = [{ to: paths.home, label: 'Home', end: true }] as const;
+const navItems = [
+  { to: paths.home, label: 'Home', end: true },
+  { to: paths.todos, label: 'Todos', end: false },
+] as const;
 
 export function RootLayout() {
   const navigation = useNavigation();
