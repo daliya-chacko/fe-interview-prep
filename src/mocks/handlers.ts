@@ -1,6 +1,6 @@
 import { http, HttpResponse, type RequestHandler } from 'msw';
 
-import { searchHandlers } from '@/features/search';
+import { searchHandlers } from '@/features/search/mocks';
 import { env } from '@/shared/lib/env';
 
 /** Prefixes a path with the configured API base so handlers follow `VITE_API_BASE_URL`. */

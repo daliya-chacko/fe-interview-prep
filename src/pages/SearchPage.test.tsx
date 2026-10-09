@@ -2,7 +2,8 @@ import { screen, waitFor } from '@testing-library/react';
 import { delay, http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 
-import { type Product, searchFixture } from '@/features/search';
+import type { Product } from '@/features/search';
+import { searchFixture } from '@/features/search/mocks';
 import { server } from '@/mocks/server';
 import { env } from '@/shared/lib/env';
 import { renderWithRouter } from '@/test/test-utils';
