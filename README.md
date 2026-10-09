@@ -8,13 +8,13 @@ foundation: tooling, architecture and an app shell with no product features yet.
 Each question is one branch, one pull request and one merge, in order from 1 to 5. Every question
 lives on its own route.
 
-| #   | Question                 | PR link                                                   |
-| --- | ------------------------ | --------------------------------------------------------- |
-| 1   | Todo App                 | https://github.com/daliya-chacko/fe-interview-prep/pull/6 |
-| 2   | Live Search              | https://github.com/daliya-chacko/fe-interview-prep/pull/7 |
-| 3   | Registration Wizard      | https://github.com/daliya-chacko/fe-interview-prep/pull/8 |
-| 4   | Data Table               | https://github.com/daliya-chacko/fe-interview-prep/pull/9 |
-| 5   | Login & Session Handling |                                                           |
+| #   | Question                 | PR link                                                    |
+| --- | ------------------------ | ---------------------------------------------------------- |
+| 1   | Todo App                 | https://github.com/daliya-chacko/fe-interview-prep/pull/6  |
+| 2   | Live Search              | https://github.com/daliya-chacko/fe-interview-prep/pull/7  |
+| 3   | Registration Wizard      | https://github.com/daliya-chacko/fe-interview-prep/pull/8  |
+| 4   | Data Table               | https://github.com/daliya-chacko/fe-interview-prep/pull/9  |
+| 5   | Login & Session Handling | https://github.com/daliya-chacko/fe-interview-prep/pull/10 |
 
 Video:
 
