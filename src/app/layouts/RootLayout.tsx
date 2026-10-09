@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigation } from 'react-router';
 
 import { paths } from '@/app/router/paths';
+import { SessionMenu, useSessionBootstrap } from '@/features/auth';
 import { cn } from '@/shared/lib/cn';
 
 /** Top-level navigation. Add an entry here when a feature registers a route. */
@@ -8,11 +9,15 @@ const navItems = [
   { to: paths.home, label: 'Home', end: true },
   { to: paths.todos, label: 'Todos', end: false },
   { to: paths.search, label: 'Search', end: false },
+  { to: paths.orders, label: 'Orders', end: false },
+  { to: paths.admin, label: 'Admin', end: false },
 ] as const;
 
 export function RootLayout() {
   const navigation = useNavigation();
   const isNavigating = navigation.state !== 'idle';
+  // Silently restores a session from the persisted refresh token after a reload.
+  useSessionBootstrap();
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -50,6 +55,7 @@ export function RootLayout() {
               ))}
             </ul>
           </nav>
+          <SessionMenu loginPath={paths.login} className="ml-auto" />
         </div>
         {/* Global pending indicator for lazy route chunks and loaders. */}
         <div
