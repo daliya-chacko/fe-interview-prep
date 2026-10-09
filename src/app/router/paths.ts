@@ -8,4 +8,5 @@ export const paths = {
   home: '/',
   todos: '/todos',
   search: '/search',
+  users: '/users',
 } as const;
