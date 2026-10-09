@@ -8,5 +8,6 @@ export const paths = {
   home: '/',
   todos: '/todos',
   search: '/search',
+  register: '/register',
   users: '/users',
 } as const;
